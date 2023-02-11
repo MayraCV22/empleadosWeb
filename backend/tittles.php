@@ -10,6 +10,8 @@
             echo json_encode(deleteTittle());
         } else if($_GET['type'] == 'getemployeessalarybyid'){
             echo json_encode(getemployeessalarybyid());
+        } else if($_GET['type'] == 'updatetittle'){
+            echo json_encode(updatetittle());
         }
 
     }
@@ -133,5 +135,25 @@
       return $result;
     }
 
+    function updatetittle(){
+      try{
+        $sql = "UPDATE titles SET title = '".$_POST['puesto']."' WHERE emp_no = " . $_POST['id'];
+        $responde = conectar()->query($sql);
+        if($responde == 1){
+          $result['code'] = 200;
+          $result['status'] = 'success';
+          $result['msm'] = 'El puesto se ha modificado corectamente';
+        } else{
+          $result['code'] = 202;
+          $result['status'] = 'warning';
+          $result['msm'] = 'error al modificar el puesto';
+        }
+      }catch(Exception $e){
+        $result['code'] = 500;
+        $result['status'] = 'error';
+        $result['msm'] = 'error al modificar el puesto';
+      }
+      return $result;
+    }
 
 ?>

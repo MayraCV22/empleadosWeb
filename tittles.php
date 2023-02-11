@@ -17,7 +17,7 @@
   </tbody>
 </table>
 
-<!-- Modal -->
+<!-- Modal nuevo salarye -->
 <div class="modal fade" id="tittlenewModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -39,7 +39,7 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-        <button type="button" class="btn btn-primary" id ="btnnewtittles">Guardar</button>
+        <button type="button" class="btn btn-primary" id ="btnnewtittlessave">Guardar</button>
       </div>
     </div>
   </div>
@@ -50,7 +50,7 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <h5 class="modal-title" id="exampleModalLabel">Editar puesto</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -63,13 +63,11 @@
             <div class="form-group">
               <input type="text" class="form-control" id="tittleemployees"/>
             </div>
-            <div class="form-group">
-            </div>
         </form>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+        <button type="button" class="btn btn-primary" id="btnedittittle">Guardar</button>
       </div>
     </div>
   </div>

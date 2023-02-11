@@ -122,10 +122,12 @@ const updatetittleemployees = (id)=>{
       if(s.code == 200){
 
         var empleado = s.empleado;
-
+        $("#idemp").val(id)
         $("#selectemployeesedit").val(empleado.emp_no);
         $("#tittleemployees").val(empleado.title);
         $("#editsalaryemployeeModal").modal("show");
+
+
       }
     },
     error:function(e){
@@ -175,7 +177,7 @@ const deletetittleemployees = (id)=>{
 $("#btnnewtittles").click(function(e){
     $("#tittlenewModal").modal("show");
 });
-$("#btnnewtittles").click(function(e){
+$("#btnnewtittlessave").click(function(e){
     var empleado = $("#selectemployees").val();
     var puesto = $("#puestoid").val();
 
@@ -202,4 +204,36 @@ $("#btnnewtittles").click(function(e){
             console.log(e);
         }
     });
+});
+
+
+$("#btnedittittle").click(function (e) {
+  var empleado = $("#selectemployeesedit").val();
+  var puesto = $("#tittleemployees").val();
+
+  if(empleado != 0 && puesto != ''){
+    $.ajax({
+      url: "backend/tittles.php?type=updatetittle",
+      type: "post",
+      dataType: "json",
+      data: {"id":empleado,"puesto":puesto},
+      success:function(s){
+        console.log(s);
+        Swal.fire({
+          position: 'top-end',
+          icon: s.status,
+          title: s.msm,
+          showConfirmButton: false,
+          timer: 1500
+        });
+        loadingtable();
+        $("#editsalaryemployeeModal").modal("hide");
+
+      },
+      error:function(e){
+        console.log(error);
+        console.log(e);
+      }
+    })
+  }
 });
