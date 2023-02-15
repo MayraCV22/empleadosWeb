@@ -1,5 +1,3 @@
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -16,22 +14,12 @@
 </head>
 <body>
     <header>
-        <!--
-        <ul>
-            <li><a href="index.php">Inicio</a></li>
-            <li><a href="empleados.php">Empleados</a></li>
-            <li><a href="departamentos.php">Departamentos</a></li>
-            <li><a href="tittles.php">Puestos empresariales</a></li>
-            <li><a href="salaries.php">salarios</a></li>
-        </ul>
-        -->
         <nav>
             <a href="index.php">Inicio</a>
             <a href="empleados.php">Empleados</a>
             <a href="tittles.php">Puestos</a>
             <a href="salaries.php">Salarios</a>
             <a href="departamentos.php">Departamentos</a>
-
             <div class="animation start-home"></div>
         </nav>
     </header>

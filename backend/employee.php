@@ -6,7 +6,7 @@
             echo json_encode(getEmpleados());
         } else if($_GET['type'] == 'add' ){
             echo json_encode(addEmpleados());
-        } else if($_GET['type'] == 'destroy' ){
+        }else if($_GET['type'] == 'destroy' ){
             echo json_encode(destroyEmpleados());
         } else if($_GET['type'] == 'getbyidemployee' ){
             echo json_encode(getEmpleadosbyid());
@@ -32,7 +32,8 @@
             $start = $_GET['start'];
             $end = $_GET['length'];
 
-            $sql = "SELECT * FROM employees WHERE first_name LIKE '%" . $search . "%' OR last_name LIKE '%" . $search . "%' OR gender LIKE '%" . $search . "%' LIMIT " . $start . "," . $end;
+            $sql = "SELECT * FROM employees WHERE first_name LIKE '%" . $search . "%' OR last_name LIKE '%" . $search . "%' OR gender LIKE '%" .
+                    $search . "%' LIMIT " . $start . "," . $end;
 
             if($resultado = conectar()->query($sql)){
 
@@ -62,7 +63,6 @@
 
         return $result;
     }
-
     function selectEmpleado(){
         $empleados = array();
         try{
@@ -85,7 +85,6 @@
         }
         return $result;
     }
-
     function selectallempleados(){
       try{
         $empleados = array();
@@ -125,7 +124,6 @@
         }
         return $result;
     }
-
     function addEmpleados(){
         try {
             $firstname = $_POST['firstName'];
@@ -193,7 +191,6 @@
         }
         return $result;
     }
-
     function destroyEmpleados(){
         try{
             $sql = "DELETE FROM employees WHERE emp_no = " . $_POST['id'];

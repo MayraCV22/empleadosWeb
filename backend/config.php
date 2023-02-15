@@ -3,5 +3,4 @@
     define("USER","root");
     define("PASSWORD","");
     define("BD","employees")
-
 ?>

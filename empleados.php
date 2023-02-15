@@ -46,8 +46,7 @@
             </div>
             <div class="form-group">
                 <input type="date" id="hireDate" class="form-control"/>
-            </div>            
-            
+            </div>
         </form>
       </div>
       <div class="modal-footer">
