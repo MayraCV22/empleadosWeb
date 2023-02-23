@@ -1,5 +1,12 @@
 $(document).ready(function () {
     loadingtable();
+    var tipeusr = localStorage.getItem("type");
+
+    // Agregar
+    if(tipeusr == 'usuario' || tipeusr == 'mantenimineto'){
+      $("#btnneweployee").prop( "disabled", true );
+    }
+
 });
 
 const loadingtable = () =>{
@@ -45,15 +52,30 @@ const loadingtable = () =>{
             "render": function (data, type, JsonResultRow, meta){
                 return JsonResultRow['first_name'] + " " + JsonResultRow['last_name'];
             }
-    
+
         },
         { data: "gender" },
         { data: "birth_date" },
         { data: "hire_date" },
         { "data": "emp_no",
             "render": function (id, type, JsonResultRow, meta){
-                return "<button class='btn btn-success' onclick = updateemployees('"+id+"')>Editar</button> <span> </span>" +
-                       "<button class='btn btn-danger' onclick = deleteemployees('"+id+"')>Eliminar</button>"
+
+                var btns = "";
+                var tipeusr = localStorage.getItem("type");
+
+                // Modificar
+                if(tipeusr == 'adminstrador' || tipeusr == 'mantenimineto' || tipeusr == 'superusuario'){
+                  btns += "<button class='btn btn-success' onclick = updateemployees('"+id+"')>Editar</button> <span> </span>";
+                } else{
+                  btns += "<button class='btn btn-success' disabled>Editar</button> <span> </span>";
+                }
+                // Eliminar
+                if(tipeusr == 'mantenimineto' || tipeusr == 'superusuario'){
+                  btns += "<button class='btn btn-danger' onclick = deleteemployees('"+id+"')>Eliminar</button>";
+                } else{
+                  btns += "<button class='btn btn-danger' disabled>Eliminar</button>";
+                }
+                return btns;
             }
         },
     ]
@@ -69,7 +91,7 @@ function updateemployees(id){
         success:function(s){
             if(s.code == 200){
                 var datos = s.employee;
-                
+
                 $("#frmeditemployee").empty();
                 var frm = "<div class='form-group'><input type='text' class'form-control' id='id' value='"+datos.emp_no+"' disabled/></div>" +
                             "<div class='form-group'><input type='text' class='form-control' id='nameupdate'  value='"+datos.first_name+"'/></div>" +
@@ -85,8 +107,8 @@ function updateemployees(id){
                                 frm += "<input type='radio' class='form-check-input' name='genderupdate' id='genderupdate' value='m'/>Masculino </br>";
                                 frm += "<input type='radio' class='form-check-input' name='genderupdate' id='genderupdate' value='f'/>Femenino </br></br></div>";
                             }
-                           
-                            
+
+
                             frm += "<div class='form-group'><input type='date' class='form-control' id='birthDayupdate' value='"+datos.birth_date+"'/></div>" +
                             "<div class='form-group'><input type='date' class='form-control' id='hireDateupdate' value='"+datos.hire_date+"'/></div>";
                 $("#frmeditemployee").append(frm);
@@ -137,7 +159,7 @@ function deleteemployees(id){
       })
 }
 
-$("#btnneweployee").click(function(e){
+$("#btnneweployeesave").click(function(e){
     var firstName = $("#firstName").val();
     var lastName = $("#lastName").val();
     var gender = $('input:radio[name=gender]:checked').val(); //$("#gender").val(); // undefined
@@ -147,7 +169,7 @@ $("#btnneweployee").click(function(e){
     if(firstName != '' && lastName != '' && gender != undefined && birthDay != '' && hireDate != '' && validarFechaMenorActual(birthDay)){
         $.ajax({
             url: "backend/employee.php?type=add",
-            type: "post", 
+            type: "post",
             dataType: 'json',
             data:{"firstName":firstName,"lastName":lastName,"gender": gender, "birthDay": birthDay, "hireDate": hireDate},
             success:function(s){
@@ -194,7 +216,7 @@ $("#btnupdateemployeesave").click(function(e){
     if(firstName != '' && lastName != '' && gender != undefined && birthDay != '' && hireDate != '' && validarFechaMenorActual(birthDay)){
         $.ajax({
             url: "backend/employee.php?type=update",
-            type: "post", 
+            type: "post",
             dataType: 'json',
             data:{"id":id,"firstName":firstName,"lastName":lastName,"gender": gender, "birthDay": birthDay, "hireDate": hireDate},
             success:function(s){

@@ -13,9 +13,25 @@
     <title>Empleados</title>
 </head>
 <body>
+
+  <div class="container">
+    <div class="row">
+      <div class="col-sm">
+        <h3 id="userloginwelcome"></h3>
+      </div>
+      <div class="col-sm">
+      </div>
+      <div class="col-sm">
+        <button type="button" class="btn btn-link" style="float:right;" id="btncerrarsesion">cerrar sesion</button>
+      </div>
+    </div>
+  </div>
+
+
+
     <header>
         <nav>
-            <a href="index.php">Inicio</a>
+            <a href="home.php">Inicio</a>
             <a href="empleados.php">Empleados</a>
             <a href="tittles.php">Puestos</a>
             <a href="salaries.php">Salarios</a>
@@ -127,3 +143,22 @@
         color: #2BD6B4;
     }
 </style>
+
+<script>
+  var nombre = localStorage.getItem('nombre');
+
+  if (nombre == null){
+    window.location.href = "index.php";
+  } 
+
+  var nombre = localStorage.getItem("nombre");
+
+  $("#userloginwelcome").text("Bienvenid@ "+ nombre);
+
+  $("#btncerrarsesion").click(function(e){
+    localStorage.clear();
+
+    window.location.href = "index.php";
+  })
+
+</script>

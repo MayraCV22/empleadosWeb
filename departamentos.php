@@ -2,7 +2,7 @@
 
 <h1>Departamentos</h1>
 
-<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#departamentonewModal">
+<button type="button" id="btnmodalnewdepartament" class="btn btn-primary" data-toggle="modal" data-target="#departamentonewModal">
   nuevo departamento
 </button>
 

@@ -1,5 +1,11 @@
 $(document).ready(function () {
     loadingtable();
+    var tipeusr = localStorage.getItem("type");
+
+    // Agregar
+    if(tipeusr == 'usuario' || tipeusr == 'mantenimineto'){
+      $("#btnmodalnewdepartament").prop( "disabled", true );
+    }
 });
 
 const loadingtable = () => {
@@ -44,12 +50,21 @@ const loadingtable = () => {
         { data: "dept_name" },
         { data: "dept_no",
             "render": function (id, type, JsonResultRow, meta){
-                //return '<button class="btn btn-info" onclick = updatedepartament('+(id)+')>Editar</button><span></span>' +
-                  //     '<button class="btn btn-danger" onclick = deletedepartament('+(id)+')>Eliminar</button>' 
-                return "<button class='btn btn-info' onclick = updatedepartament('"+(id)+"')>Editar</button><span> </span>" +
-                       "<button class='btn btn-danger' onclick = deletedepartament('"+(id)+"')>Eliminar</button>"
-       
-            
+              var btns = "";
+              var tipeusr = localStorage.getItem("type");
+
+              if(tipeusr == 'adminstrador' || tipeusr == 'mantenimineto' || tipeusr == 'superusuario'){
+                btns += "<button class='btn btn-info' onclick = updatedepartament('"+(id)+"')>Editar</button><span> </span>";
+              }else{
+                btns += "<button class='btn btn-info' disabled>Editar</button><span> </span>";
+              }
+
+              if(tipeusr == 'mantenimineto' || tipeusr == 'superusuario'){
+                btns += "<button class='btn btn-danger' onclick = deletedepartament('"+(id)+"')>Eliminar</button>";
+              }else{
+                btns += "<button class='btn btn-danger' disabled>Eliminar</button>";
+              }
+              return btns;
             }
         },
     ]
@@ -60,7 +75,7 @@ function updatedepartament(id){
     $.ajax({
         url:"backend/departament.php?type=getbyiddepartament",
         type:"post",
-        dataType:"json", 
+        dataType:"json",
         data:{"id":id},
         success:function(s){
             if(s.code == 200){
@@ -69,7 +84,7 @@ function updatedepartament(id){
                 $("#frmeditdepartament").empty();
                 var frm = "<div class='form-group'><input type='text' id='id' class='form-control' value='"+datos.dept_no+"' disabled/></div>" +
                            "<div class='form-group'><input type='text' id='nameupdate' class='form-control' value='"+datos.dept_name+"'/></div>";
-                
+
                 $("#frmeditdepartament").append(frm);
                 $("#updatedepartamentModal").modal("show");
             }
@@ -108,7 +123,7 @@ function deletedepartament(id){
                         timer: 1500
                       });
                     if(s.code == 200){
-                        loadingtable(); 
+                        loadingtable();
                     }
                 },
                 error:function(e){
@@ -121,7 +136,7 @@ function deletedepartament(id){
 }
 
 $("#btnnewdepa").click(function(e){
-    
+
     var nombre = $("#name").val();
 
     if(nombre != ''){

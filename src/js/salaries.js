@@ -1,5 +1,11 @@
 $(document).ready(function () {
     loadingtable();
+    var tipeusr = localStorage.getItem("type");
+
+    // Agregar
+    if(tipeusr == 'usuario' || tipeusr == 'mantenimineto'){
+      $("#btnnewmodalsalary").prop( "disabled", true );
+    }
     loadingempleados($("#employees"));
 });
 
@@ -46,8 +52,20 @@ columns: [
     { data: "salary" },
     { "data": "emp_no",
         "render": function (id, type, JsonResultRow, meta){
-            return "<button class='btn btn-success' onclick = updatesalaryemployees('"+id+"')>Editar</button> <span> </span>" +
-                   "<button class='btn btn-danger' onclick = deletesalarymployees('"+id+"')>Eliminar</button>"
+          var btns = "";
+          var tipeusr = localStorage.getItem("type");
+          if(tipeusr == 'adminstrador' || tipeusr == 'mantenimineto' || tipeusr == 'superusuario'){
+            btns += "<button class='btn btn-success' onclick = updatesalaryemployees('"+id+"')>Editar</button> <span> </span>";
+          }else{
+            btns += "<button class='btn btn-success' disabled>Editar</button> <span> </span>";
+          }
+
+          if(tipeusr == 'mantenimineto' || tipeusr == 'superusuario'){
+            btns += "<button class='btn btn-danger' onclick = deletesalarymployees('"+id+"')>Eliminar</button>";
+          }else{
+            btns += "<button class='btn btn-danger' disabled>Eliminar</button>";
+          }
+            return btns;
         }
     },
 ]

@@ -1,6 +1,6 @@
 <?php include_once("header.php"); include_once("backend/employee.php");?>
 <h1>salarios de los empleados</h1>
-<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addsalariesModal">
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addsalariesModal" id="btnnewmodalsalary">
 Agregar salario
 </button>
 </br></br>

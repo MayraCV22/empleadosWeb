@@ -1,9 +1,10 @@
 <?php include_once("header.php"); include_once("backend/employee.php");?>
 <h1>Empleados</h1>
-<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#newEmployeesModal">
+<button type="button" id="btnneweployee" class="btn btn-primary" data-toggle="modal" data-target="#newEmployeesModal">
   Nuevo empleado
 </button>
-
+</br>
+</br>
     <table id="table_employees">
         <thead>
             <tr>
@@ -51,7 +52,7 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-        <button type="button" class="btn btn-primary" id = "btnneweployee">Guardar</button>
+        <button type="button" class="btn btn-primary" id = "btnneweployeesave">Guardar</button>
       </div>
     </div>
   </div>
